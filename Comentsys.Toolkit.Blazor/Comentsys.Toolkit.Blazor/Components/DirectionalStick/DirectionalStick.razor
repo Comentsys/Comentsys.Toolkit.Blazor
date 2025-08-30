@@ -1,0 +1,12 @@
+﻿@namespace Comentsys.Toolkit.Blazor
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 @Total @Total" width="@Total" height="@Total" 
+    style="user-select: none">
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <title>@Title</title>
+    }
+    <circle cx="@Centre" cy="@Centre" r="@Radius" fill="@_fill" />
+    <circle cx="@_knobX" cy="@_knobY" r="@Knob" fill="@_foreground"
+    @onpointerdown="StartCapture" @onpointermove="MoveKnob"
+    @onpointerup="EndCapture" @onpointerleave="Reset" />
+</svg>

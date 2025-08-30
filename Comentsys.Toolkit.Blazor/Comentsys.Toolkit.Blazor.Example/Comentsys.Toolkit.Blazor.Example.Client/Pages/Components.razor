@@ -1,0 +1,57 @@
+﻿@page "/components"
+@using System.Drawing
+@using Comentsys.Toolkit.Blazor
+@rendermode InteractiveAuto
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<br/><br/>
+
+<Clock HandsFill="(new Color[] { Color.Red, Color.Green, Color.Blue })" IsRealTimeForWebAssembly="true" />
+
+<br /><br />
+
+<Dial Fill="Color.Teal" Foreground="Color.WhiteSmoke" ValueChanged="DialChanged" />
+
+<p>@_dial</p>
+
+<DirectionalPad DirectionChanged="DirectionChanged" DirectionsFill="(new Color[] { Color.Red, Color.Green, Color.Blue, Color.Yellow })" />
+
+<p>@_direction</p>
+
+<DirectionalStick Foreground="Color.DarkGoldenrod" Fill="Color.Goldenrod" ValueChanged="StickChanged" />
+
+<p>@_stick</p>
+
+<SegmentDisplay Mode="DisplayMode.Time" Height="100" Fill="@Color.Red" IsRealTimeForWebAssembly="true" />
+
+<br/><br/>
+
+<MatrixDisplay Mode="DisplayMode.Time" Height="100" Fill="@Color.YellowGreen" IsRealTimeForWebAssembly="true" />
+
+@code {
+    private int currentCount = 0;    
+    private string _dial = string.Empty;
+    private string _direction = string.Empty;
+    private string _stick = string.Empty;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void DialChanged(double value) => 
+        _dial = $"Dial: {value}";
+
+    private void DirectionChanged(DirectionalPadDirection direction) => 
+        _direction += $"Pad: {direction}";
+
+    private void StickChanged(DirectionalStickValue position) =>
+        _stick += $"Stick Angle: {position.Angle}, Ratio: {position.Ratio}";
+}

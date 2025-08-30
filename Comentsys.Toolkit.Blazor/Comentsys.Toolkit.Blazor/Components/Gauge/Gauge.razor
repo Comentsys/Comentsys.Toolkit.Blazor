@@ -1,0 +1,17 @@
+﻿@namespace Comentsys.Toolkit.Blazor
+<svg xmlns="http://www.w3.org/2000/svg" width="@Size" height="@Size" viewBox="0 0 @Size @Size">
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <title>@Title</title>
+    }
+    <circle cx="@Radius" cy="@Radius" r="@Radius" fill="@_fill" />
+    @foreach (var (x, y, width, height, angle) in _markers)
+    {
+        <rect x="@x" y="@y"
+        width="@width" height="@height" fill="@_foreground"
+        transform="rotate(@angle, @Radius, @Radius)" />
+    }
+    <rect x="@NeedleX" y="@NeedleY" width="@Needle" height="@NeedleHeight" 
+    fill="@_foreground" transform="rotate(@NeedleAngle, @Radius, @Radius)" />
+    <circle cx="@Radius" cy="@Radius" r="@Middle" fill="@_foreground" />
+</svg>
