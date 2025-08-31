@@ -14,7 +14,7 @@
 
 ### Example
 
-![Asset Component Example](Assets/asset-component.png)
+![Asset Component Example](https://raw.githubusercontent.com/Comentsys/Comentsys.Toolkit.Blazor/refs/heads/main/Assets/asset-component.png)
 
 > Example using `AssetResource` from `ShadedFluentEmoji.Get(FluentEmojiType.GrinningFace)` in **Package** of `Comentsys.Assets.FluentEmoji.Shaded`.
 
@@ -310,7 +310,7 @@ Title Text of Donut
 
 ### Example
 
-![Gauge Component Example](Assets/gauge-component.png)
+![Gauge Component Example](https://raw.githubusercontent.com/Comentsys/Comentsys.Toolkit.Blazor/refs/heads/main/Assets/gauge-component.png)
 
 ### Fill
 
