@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comentsys.Toolkit.Blazor", "Comentsys.Toolkit.Blazor\Comentsys.Toolkit.Blazor.csproj", "{45AEF6D2-5F52-532E-B790-1C51C5ED8C8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comentsys.Toolkit.Blazor.Example", "Comentsys.Toolkit.Blazor.Example\Comentsys.Toolkit.Blazor.Example\Comentsys.Toolkit.Blazor.Example.csproj", "{AD34A463-BB37-4103-AA33-151CE6F26118}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comentsys.Toolkit.Blazor.Example.Client", "Comentsys.Toolkit.Blazor.Example\Comentsys.Toolkit.Blazor.Example.Client\Comentsys.Toolkit.Blazor.Example.Client.csproj", "{E7F94BFD-4384-4C2A-BC22-5EC552903959}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45AEF6D2-5F52-532E-B790-1C51C5ED8C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45AEF6D2-5F52-532E-B790-1C51C5ED8C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45AEF6D2-5F52-532E-B790-1C51C5ED8C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45AEF6D2-5F52-532E-B790-1C51C5ED8C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD34A463-BB37-4103-AA33-151CE6F26118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD34A463-BB37-4103-AA33-151CE6F26118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD34A463-BB37-4103-AA33-151CE6F26118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD34A463-BB37-4103-AA33-151CE6F26118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F94BFD-4384-4C2A-BC22-5EC552903959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F94BFD-4384-4C2A-BC22-5EC552903959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F94BFD-4384-4C2A-BC22-5EC552903959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F94BFD-4384-4C2A-BC22-5EC552903959}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B39B7C4A-9A02-4ABB-B581-794003D61A1C}
+	EndGlobalSection
+EndGlobal

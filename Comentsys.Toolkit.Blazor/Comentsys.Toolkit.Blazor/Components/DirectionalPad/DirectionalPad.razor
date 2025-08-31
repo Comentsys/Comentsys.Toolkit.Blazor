@@ -1,0 +1,20 @@
+﻿@namespace Comentsys.Toolkit.Blazor
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="@Size" height="@Size" 
+    style="user-select: none">
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <title>@Title</title>
+    }
+    <path d="M 70,0 110,0 110,60 90,80 70,60 70,0 z" fill="@_up"
+          @onpointerdown="() => StartCapture(DirectionalPadDirection.Up)"
+          @onpointerup="EndCapture" @onpointerleave="EndCapture" />
+    <path d="M 70,120 90,100 110,120 110,180 70,180 z" fill="@_down"
+          @onpointerdown="() => StartCapture(DirectionalPadDirection.Down)" 
+          @onpointerup="EndCapture" @onpointerleave="EndCapture" />
+    <path d="M 0,70 60,70 80,90 60,110 0,110 z" fill="@_left"
+          @onpointerdown="() => StartCapture(DirectionalPadDirection.Left)" 
+          @onpointerup="EndCapture" @onpointerleave="EndCapture" />
+    <path d="M 100,90 120,70 180,70 180,110 120,110 z" fill="@_right"
+          @onpointerdown="() => StartCapture(DirectionalPadDirection.Right)" 
+          @onpointerup="EndCapture" @onpointerleave="EndCapture" />
+</svg>

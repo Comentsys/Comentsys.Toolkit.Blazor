@@ -1,0 +1,40 @@
+﻿@namespace Comentsys.Toolkit.Blazor
+<svg xmlns="http://www.w3.org/2000/svg" width="@Size" height="@Size" viewBox="0 0 @diameter @diameter">
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <title>@Title</title>
+    }
+    <circle cx="@adjusted" cy="@adjusted" r="@radius" stroke="@_stroke" 
+    stroke-width="@stroke_width" fill="@_background" />
+    @foreach (var (x, y, width, height, angle) in _markers)
+    {
+        <rect x="@x" y="@y" fill="@_foreground" 
+            width="@width" height="@height"
+            transform="rotate(@angle, @adjusted, @adjusted)"
+            rx="@(width / 2)" ry="@(width / 2)" />
+    }
+    @if (ShowHourHand)
+    {
+        <rect x="@(adjusted - hours_width / 2)" y="@(adjusted - hours_height)"
+            width="@hours_width" height="@hours_height" fill="@_hour"
+            rx="@(hours_width / 2)" ry="@(hours_width / 2)"
+            transform="rotate(@HourAngle, @adjusted, @adjusted)" />
+        <circle cx="@adjusted" cy="@adjusted" r="@hours_width" fill="@_hour" />
+    }
+    @if (ShowMinuteHand)
+    {
+        <rect x="@(adjusted - minutes_width / 2)" y="@(adjusted - minutes_height)"
+            width="@minutes_width" height="@minutes_height" fill="@_minute"
+            rx="@(minutes_width / 2)" ry="@(minutes_width / 2)"
+            transform="rotate(@MinuteAngle, @adjusted, @adjusted)" />
+        <circle cx="@adjusted" cy="@adjusted" r="@minutes_width" fill="@_minute" />
+    }
+    @if (ShowSecondHand)
+    {
+        <rect x="@(adjusted - seconds_width / 2)" y="@(adjusted - seconds_height)"
+            width="@seconds_width" height="@seconds_height" fill="@_second"
+            rx="@(seconds_width / 2)" ry="@(seconds_width / 2)"
+            transform="rotate(@SecondAngle, @adjusted, @adjusted)" />
+        <circle cx="@adjusted" cy="@adjusted" r="@seconds_width" fill="@_second" />
+    }    
+</svg>

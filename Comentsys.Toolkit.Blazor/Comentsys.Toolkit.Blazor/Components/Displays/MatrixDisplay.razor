@@ -1,0 +1,11 @@
+﻿@namespace Comentsys.Toolkit.Blazor
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 @_width @segment_height" @attributes="_attributes">
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <title>@Title</title>
+    }
+    @foreach(var group in _groups)
+    {
+        @((MarkupString)group)
+    }
+</svg>

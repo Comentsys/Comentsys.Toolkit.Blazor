@@ -1,0 +1,42 @@
+﻿@page "/"
+@using Comentsys.Toolkit.Blazor
+@using Comentsys.Assets.FluentEmoji
+@using System.Drawing
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<br/><br/>
+
+<Asset Height="200" AssetResource="ShadedFluentEmoji.Get(FluentEmojiType.GrinningFace)" />
+
+<br /><br />
+
+<Asset Height="200" Mode="AssetMode.Inline" AssetResource="ShadedFluentEmoji.Get(FluentEmojiType.GrinningFace)" />
+
+<br/><br/>
+
+<Clock HandsFill="(new Color[] { Color.Red, Color.Green, Color.Blue })" />
+
+<br/><br/>
+
+<SegmentDisplay Mode="DisplayMode.Time" Height="200" Fill="@Color.Red" />
+
+<br /><br />
+
+<MatrixDisplay Mode="DisplayMode.Time" Height="200" Fill="@Color.YellowGreen" />
+
+<br /><br />
+
+<Donut Hole="50" StrokeWidth="5" Items="(new double[] { 5, 8, 13, 21 })" SectorsFill="(new Color[] { Color.Red, Color.Green, Color.Blue, Color.Yellow })" />
+
+<br/><br/>
+
+<Gauge Minimum="50" Maximum="70" Value="55" Fill="Color.Yellow" Foreground="Color.Red" />
+
+<br /><br />  
+
+<Sector Start="0" Finish="90" Fill="Color.MediumSeaGreen" Hole="50" />

@@ -1,0 +1,11 @@
+﻿@namespace Comentsys.Toolkit.Blazor
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 @Size @Size" width="@Size" height="@Size">
+    @if (!string.IsNullOrWhiteSpace(Title))
+    {
+        <title>@Title</title>
+    }
+    @foreach(var (path, fill) in _sectors)
+    {
+        <path d="@path" fill="@fill" stroke="@_stroke" stroke-width="@StrokeWidth" />
+    }
+</svg>
