@@ -1,16 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Comentsys.Toolkit.Blazor\Comentsys.Toolkit.Blazor.csproj" />
-    <ProjectReference Include="..\Comentsys.Toolkit.Blazor.Example.Client\Comentsys.Toolkit.Blazor.Example.Client.csproj" />
-    <PackageReference Include="Comentsys.Assets.FluentEmoji.Shaded" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.8" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Comentsys.Toolkit.Blazor" Version="1.*"  />
+		<ProjectReference Include="..\Comentsys.Toolkit.Blazor.Example.Client\Comentsys.Toolkit.Blazor.Example.Client.csproj" />
+		<PackageReference Include="Comentsys.Assets.FluentEmoji.Shaded" Version="2.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.8" />
+	</ItemGroup>
 
 </Project>
