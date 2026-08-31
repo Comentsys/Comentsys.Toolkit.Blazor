@@ -1,0 +1,15 @@
+<div class="reference-head">
+    <div>
+        <span class="pill">@Name</span>
+        <h2>@Name</h2>
+        <p>@Text</p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+}

@@ -1,0 +1,47 @@
+@page "/getting-started"
+<PageTitle>Comentsys.Toolkit.Blazor - Getting Started</PageTitle>
+<section class="hero">
+    <span class="pill">Setup</span>
+    <h1>Use the toolkit in a Blazor app.</h1>
+    <p>
+        This demo references the Comentsys.Toolkit.Blazor NuGet package so it behaves like a consuming application.
+    </p>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <span class="pill">Install</span>
+            <h2>Add the package</h2>
+            <p>Use the NuGet package in Blazor WebAssembly or Blazor Server projects.</p>
+        </div>
+    </div>
+
+    <article class="card">
+        <CodeBlock Title="Terminal" Code="@InstallSnippet" />
+    </article>
+</section>
+
+<section class="section">
+    <div class="grid">
+        <article class="card">
+            <span class="pill">1</span>
+            <h3>Reference the package</h3>
+            <p>Applications use the published toolkit package from NuGet.</p>
+            <CodeBlock Code="@PackageReferenceSnippet" />
+        </article>
+        <article class="card">
+            <span class="pill">2</span>
+            <h3>Add namespaces</h3>
+            <p>Import the toolkit and any asset packages needed by the examples.</p>
+            <CodeBlock Code="@ImportsSnippet" />
+        </article>
+        <article class="card">
+            <span class="pill">3</span>
+            <h3>Render components</h3>
+            <p>Pass <code>System.Drawing.Color</code> values and event callbacks directly from Razor.</p>
+            <CodeBlock Code="@UsageSnippet" />
+        </article>
+    </div>
+</section>
+

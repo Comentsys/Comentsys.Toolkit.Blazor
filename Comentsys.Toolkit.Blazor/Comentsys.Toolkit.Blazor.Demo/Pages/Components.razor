@@ -1,0 +1,33 @@
+@page "/components"
+<PageTitle>Comentsys.Toolkit.Blazor - Components</PageTitle>
+<section class="hero">
+    <span class="pill">Components</span>
+    <h1>Component reference.</h1>
+    <p>
+        Browse each component on its own page with live parameters, callback output,
+        API summaries, and copyable Razor snippets.
+    </p>
+</section>
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <span class="pill">Index</span>
+            <h2>Component pages</h2>
+            <p>Open a focused reference page for the component you want to use.</p>
+        </div>
+    </div>
+    <div class="grid">
+        @foreach (var component in ComponentLinks)
+        {
+            <a class="component-link card" href="@($"components/{component.Slug}")">
+                <span class="pill">@component.Group</span>
+                <h3>@component.Name</h3>
+                <p>@component.Description</p>
+            </a>
+        }
+    </div>
+</section>
+
+
+
+

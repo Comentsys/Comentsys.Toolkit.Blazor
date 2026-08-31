@@ -14,6 +14,7 @@ public partial class DirectionalStick
     private double _knobX;
     private double _knobY;
     private bool _capture;
+    private int? _previousSize;
 
     private double Radius => (Size == null ? default_size : Size.Value) / 2;
     private double Knob => Radius / 2;  
@@ -36,8 +37,11 @@ public partial class DirectionalStick
     /// Start Capture
     /// </summary>
     /// <param name="e">Pointer Event Args</param>
-    private void StartCapture(PointerEventArgs e) => 
+    private void StartCapture(PointerEventArgs e)
+    {
         _capture = true;
+        MoveKnob(e);
+    }
 
     /// <summary>
     /// End Capture
@@ -70,7 +74,8 @@ public partial class DirectionalStick
             _knobX = x;
             _knobY = y;
             var degrees = Math.Atan2(dy, dx) * (180 / Math.PI);
-            var ratio = Math.Min(distance / Radius, 1.0);
+            var sensitivity = Math.Max(0, Sensitivity);
+            var ratio = Math.Clamp(distance / Radius * sensitivity, 0, 1.0);
             ValueChanged.InvokeAsync(new(degrees, ratio));
         }
         catch
@@ -93,6 +98,11 @@ public partial class DirectionalStick
     {
         _fill = Fill.AsHtmlColor() ?? grey;
         _foreground = Foreground.AsHtmlColor() ?? black;
+        if (_previousSize != Size)
+        {
+            Reset();
+            _previousSize = Size;
+        }
     }
 
     /// <summary>

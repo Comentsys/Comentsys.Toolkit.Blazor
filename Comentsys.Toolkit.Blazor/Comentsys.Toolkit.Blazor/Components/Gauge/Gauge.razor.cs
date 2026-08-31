@@ -16,6 +16,9 @@ public partial class Gauge
     private readonly List<(double x, double y, double width, double height, double angle)> _markers = [];
     private string? _foreground = black;
     private string? _fill = grey;
+    private int? _previousSize;
+    private double _previousMinimum;
+    private double _previousMaximum;
 
     private double Radius => (Size ?? default_size) / 2.0;
     private double Middle => (Size ?? default_size) / 20.0;
@@ -54,7 +57,6 @@ public partial class Gauge
         Minimum = Math.Max(min_value, Minimum);
         Maximum = Math.Min(max_value, Maximum);
         Value = Math.Clamp(Value, (int)Minimum, (int)Maximum);
-        GenerateMarkers();
     }
 
     /// <summary>
@@ -62,8 +64,18 @@ public partial class Gauge
     /// </summary>
     protected override void OnParametersSet()
     {
+        Minimum = Math.Max(min_value, Minimum);
+        Maximum = Math.Min(max_value, Maximum);
+        Value = Math.Clamp(Value, (int)Minimum, (int)Maximum);
         _fill = Fill.AsHtmlColor() ?? grey;
         _foreground = Foreground.AsHtmlColor() ?? black;
+        if (_previousSize != Size || _previousMinimum != Minimum || _previousMaximum != Maximum)
+        {
+            GenerateMarkers();
+            _previousSize = Size;
+            _previousMinimum = Minimum;
+            _previousMaximum = Maximum;
+        }
     }
 
     /// <summary>

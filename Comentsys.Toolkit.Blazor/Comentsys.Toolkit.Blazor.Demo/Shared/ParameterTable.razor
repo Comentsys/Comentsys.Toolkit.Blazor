@@ -1,0 +1,26 @@
+<div class="table-wrap">
+    <table class="parameter-table">
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Rows)
+            {
+                <tr>
+                    <td>@row.Name</td>
+                    <td><code>@row.Type</code></td>
+                    <td>@row.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter]
+    public IReadOnlyList<ParameterRow> Rows { get; set; } = [];
+}

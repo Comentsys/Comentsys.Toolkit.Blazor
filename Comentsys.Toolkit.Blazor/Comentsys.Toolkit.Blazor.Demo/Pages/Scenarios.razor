@@ -1,0 +1,63 @@
+@page "/scenarios"
+<PageTitle>Comentsys.Toolkit.Blazor - Scenarios</PageTitle>
+<section class="hero">
+    <span class="pill">Scenarios</span>
+    <h1>Component compositions.</h1>
+    <p>
+        Scenario examples show how toolkit components work together in app-like layouts,
+        beyond isolated API samples.
+    </p>
+    <div class="hero-actions">
+        <a class="button-primary" href="game">Play Comet Defender</a>
+        <a class="button-secondary" href="components">Browse API references</a>
+    </div>
+</section>
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <span class="pill">Smart Home</span>
+            <h2>Climate control panel</h2>
+            <p>Use a Dial to set the target temperature, a Gauge and Donut to show comfort and energy balance, and a Clock for schedule context.</p>
+        </div>
+    </div>
+    <article class="reference-card">
+        <p class="event-output status-message">@ClimateMode</p>
+        <div class="scenario-dashboard smart-home-panel">
+            <div class="scenario-panel">
+                <strong>Target</strong>
+                <Dial Size="180" Value="@_temperatureDialValue" Fill="@Comentsys" Foreground="Color.White" ValueChanged="TemperatureChanged" />
+                <span class="scenario-value">@_targetTemperature:0 degrees</span>
+            </div>
+            <div class="scenario-panel">
+                <strong>Comfort</strong>
+                <Gauge Size="180" Minimum="0" Maximum="100" Value="@ComfortLevel" Fill="@ComentsysLight" Foreground="@ComentsysDark" Needle="5" />
+                <span class="scenario-value">@ComfortLevel:0%</span>
+            </div>
+            <div class="scenario-panel">
+                <strong>Energy balance</strong>
+                <Donut Size="160" Hole="48" StrokeWidth="4" Stroke="Color.White" Items="@EnergyBalance" SectorsFill="@EnergyFills" />
+                <span class="scenario-value">@PrimaryEnergyLoad:0% active load</span>
+            </div>
+            <div class="scenario-panel wide">
+                <strong>Schedule</strong>
+                <Clock Size="160" Background="Color.White" Foreground="@ComentsysLight" HandsFill="@ClockHands" IsRealTimeForWebAssembly="true" />
+            </div>
+        </div>
+    </article>
+</section>
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <span class="pill">Game</span>
+            <h2>Comet Defender</h2>
+            <p>Uses input, display, and asset components together in a simple game.</p>
+        </div>
+    </div>
+    <article class="card scenario-card">
+        <h3>Components used</h3>
+        <p>DirectionalStick moves the ship, DirectionalPad fires, SegmentDisplay shows time, MatrixDisplay shows score, and Asset renders the ship, laser, and comet.</p>
+        <a class="button-primary" href="game">Open game</a>
+    </article>
+</section>
+
+

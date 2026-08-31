@@ -1,14 +1,14 @@
 ﻿@namespace Comentsys.Toolkit.Blazor
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 @Size @Size" width="@Size" height="@Size"
     @onpointerdown="StartCapture" @onpointermove="MoveKnob" 
-    @onpointerup="EndCapture" @onpointerleave="EndCapture"
-    style="user-select: none">
+    @onpointerup="EndCapture" @onpointerleave="EndCapture" @onpointercancel="EndCapture"
+    style="touch-action: none; user-select: none">
     @if (!string.IsNullOrWhiteSpace(Title))
     {
         <title>@Title</title>
     }
-    <circle cx="@Radius" cy="@Radius" r="@Radius" fill="@_fill" />
+    <circle cx="@Radius" cy="@Radius" r="@Radius" fill="@_fill" pointer-events="none" />
     <rect x="@((Radius - Curve))" y="@((Radius - Radius))" 
     width="@KnobWidth" height="@Radius" fill="@_foreground" rx="@Curve" ry="@Curve" 
-    transform="rotate(@Rotate, @Radius, @Radius)" />
+    transform="rotate(@Rotate, @Radius, @Radius)" pointer-events="none" />
 </svg>

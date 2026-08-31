@@ -29,6 +29,7 @@ public partial class MatrixDisplay
     private string[]? _fills;
     private Color? _prevFill;
     private Color[]? _prevDisplayFill;
+    private Style? _prevStyle;
     private List<Value> _values = [];
     
     /// <summary>
@@ -93,30 +94,36 @@ public partial class MatrixDisplay
         var value = GetValue();
         var values = Helper.GetDisplayValues(value);
         var style = Style ?? Comentsys.Assets.Display.Style.Square;
+        var isStyleChanged = _prevStyle != style;
+        var isChanged = !values.SequenceEqual(_values) || isStyleChanged;
         if (Fill is null && DisplayFill is not null)
         {
-            if(_prevDisplayFill is null || _prevDisplayFill != DisplayFill)
+            if (_prevDisplayFill is null || !_prevDisplayFill.SequenceEqual(DisplayFill) || _fills?.Length != values.Count || isStyleChanged)
             {
                 var colours = Helper.Pad(DisplayFill, Color.Black, values.Count);
                 var fills = colours.Select(c => c.AsHtmlColor());
                 for (int i = 0; i < colours.Length; i++)
                     CacheGlyphs(style, colours[i]);
+                _fill = null;
                 _fills = [.. fills];
-                _prevDisplayFill = DisplayFill;
+                _prevDisplayFill = [.. DisplayFill];
+                isChanged = true;
             }            
         }
         else
         {
-            if(_prevFill is null ||_prevFill != Fill)
+            if (_prevFill is null || _prevFill != Fill || isStyleChanged)
             {
                 var colour = Fill ?? Color.Black;
-                var fill = Fill.AsHtmlColor();
+                var fill = colour.AsHtmlColor();
                 CacheGlyphs(style, colour);
                 _fill = fill;
+                _fills = null;
                 _prevFill = Fill;
+                isChanged = true;
             }
         }
-        if (!values.SequenceEqual(_values))
+        if (isChanged)
         {
             _groups.Clear();
             decimal x = 0;
@@ -131,6 +138,7 @@ public partial class MatrixDisplay
             }
             _width = x + segment_width;
             _values = values;
+            _prevStyle = style;
         }
     }
 

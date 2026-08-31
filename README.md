@@ -1,12 +1,24 @@
 # Comentsys.Toolkit.Blazor
 
-**Comentsys.Toolkit.Blazor** is a **Toolkit** with **Components** for **Blazor Server** and / or **Blazor WebAssembly** using **.NET 8** or **.NET 9** plus useful **Extensions** using **Comentsys.Toolkit** along with **Comentsys.Assets.Display**.
+**Comentsys.Toolkit.Blazor** is a **Toolkit** with **Components** for **Blazor Server** and / or **Blazor WebAssembly** using **.NET 8**, **.NET 9** or **.NET 10** plus useful **Extensions** using **Comentsys.Toolkit** along with **Comentsys.Assets.Display**.
 
 ## Change Log
 
 ### Version 1.0.0
 
 - Initial Release
+
+### Version 1.1.0
+
+- 1.1.0 - Add .NET 10 support plus Fixed resize, colour / style update, mobile issues, directional stick sensitivity and clock stroke
+
+## Demo
+
+`Comentsys.Toolkit.Blazor.Demo` provides a Blazor WebAssembly developer reference site for the toolkit. 
+
+This demo includes themed examples for every component, interactive parameter controls, event output, copyable usage snippets, full-page examples, and practical scenarios showing how the components can be combined in real applications. 
+
+You can view the developer reference site for the toolkit at https://comentsys.github.io/Comentsys.Toolkit.Blazor
 
 ## Asset
 
