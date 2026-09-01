@@ -1,0 +1,69 @@
+@page "/game"
+@implements IDisposable
+<PageTitle>Comentsys.Toolkit.Blazor - Comet Defender</PageTitle>
+<section class="hero">
+    <span class="pill">Game</span>
+    <h1>Comet Defender.</h1>
+    <p>
+        Move in eight directions with the stick, line up the comet, then fire with the D-pad.
+    </p>
+    <div class="hero-actions">
+        <button class="button-primary" @onclick="StartGame">Start new game</button>
+        <button class="button-secondary" @onclick="ResetShip">Center ship</button>
+    </div>
+</section>
+<section class="section game-layout">
+    <article class="reference-card play-surface">
+        <div class="game-hud">
+            <div class="game-display">
+                <strong>Time</strong>
+                <SegmentDisplay Mode="DisplayMode.Value" Value="@ElapsedTime" Height="48" Fill="@Comentsys" IsRealTimeForWebAssembly="false" />
+            </div>
+            <div class="game-display">
+                <strong>Score</strong>
+                <MatrixDisplay Mode="DisplayMode.Value" Value="@ScoreDisplay" Height="48" Fill="@ComentsysLight" Style="Style.Square" IsRealTimeForWebAssembly="false" />
+            </div>
+        </div>
+        <div class="event-output status-message">@Status</div>
+        <div class="game-board" role="grid" aria-label="Comet Defender board">
+            @for (var y = 0; y < BoardSize; y++)
+            {
+                @for (var x = 0; x < BoardSize; x++)
+                {
+                    var cellX = x;
+                    var cellY = y;
+                    <div class="@GetCellClass(cellX, cellY)" role="gridcell">
+                        @if (cellX == _shipX && cellY == _shipY)
+                        {
+                            <Asset Title="Ship" Height="24" Mode="AssetMode.Inline" AssetResource="ShadedFluentEmoji.Get(FluentEmojiType.Rocket)" />
+                        }
+                        else if (cellX == _cometX && cellY == _cometY)
+                        {
+                            <Asset Title="Comet" Height="24" Mode="AssetMode.Inline" AssetResource="ShadedFluentEmoji.Get(FluentEmojiType.Comet)" />
+                        }
+                        else if (IsBeamCell(cellX, cellY))
+                        {
+                            <Asset Title="Laser" Height="20" Mode="AssetMode.Inline" AssetResource="ShadedFluentEmoji.Get(FluentEmojiType.Collision)" />
+                        }
+                    </div>
+                }
+            }
+        </div>
+        <div class="game-controls">
+            <article class="control-card">
+                <h2>Fire</h2>
+                <div class="control-preview">
+                    <DirectionalPad Size="132" DirectionsFill="@PadFills" DirectionChanged="FireBeam" />
+                </div>
+            </article>
+            <article class="control-card">
+                <h2>Move</h2>
+                <div class="control-preview">
+                    <DirectionalStick Size="88" Fill="@ComentsysLight" Foreground="@ComentsysDark" ValueChanged="MoveWithStick" />
+                </div>
+            </article>
+        </div>
+    </article>
+</section>
+
+

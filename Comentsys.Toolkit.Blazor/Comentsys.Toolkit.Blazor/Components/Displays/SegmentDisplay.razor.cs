@@ -90,30 +90,35 @@ public partial class SegmentDisplay
     {
         var value = GetValue();
         var values = Helper.GetDisplayValues(value);
+        var isChanged = !values.SequenceEqual(_values);
         if (Fill is null && DisplayFill is not null)
         {
-            if(_prevDisplayFill is null || _prevDisplayFill != DisplayFill)
+            if (_prevDisplayFill is null || !_prevDisplayFill.SequenceEqual(DisplayFill) || _fills?.Length != values.Count)
             {
                 var colours = Helper.Pad(DisplayFill, Color.Black, values.Count);
                 var fills = colours.Select(c => c.AsHtmlColor());
                 for (int i = 0; i < colours.Length; i++)
                     CacheGlyphs(colours[i]);
+                _fill = null;
                 _fills = [.. fills];
-                _prevDisplayFill = DisplayFill;
+                _prevDisplayFill = [.. DisplayFill];
+                isChanged = true;
             }            
         }
         else
         {
-            if(_prevFill is null ||_prevFill != Fill)
+            if (_prevFill is null || _prevFill != Fill)
             {
                 var colour = Fill ?? Color.Black;
-                var fill = Fill.AsHtmlColor();
+                var fill = colour.AsHtmlColor();
                 CacheGlyphs(colour);
                 _fill = fill;
+                _fills = null;
                 _prevFill = Fill;
+                isChanged = true;
             }
         }
-        if (!values.SequenceEqual(_values))
+        if (isChanged)
         {
             _groups.Clear();
             decimal x = 0;

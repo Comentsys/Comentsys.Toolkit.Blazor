@@ -1,0 +1,35 @@
+@inject IJSRuntime JS
+
+<div class="code-card">
+    <div class="code-toolbar">
+        <span>@Title</span>
+        <button type="button" class="copy-button" @onclick="CopyAsync">@_copyLabel</button>
+    </div>
+    <pre class="code-block"><code>@Code</code></pre>
+</div>
+
+@code {
+    private string _copyLabel = "Copy";
+
+    [Parameter]
+    public string Title { get; set; } = "Razor";
+
+    [Parameter]
+    public string Code { get; set; } = string.Empty;
+
+    private async Task CopyAsync()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("navigator.clipboard.writeText", Code);
+            _copyLabel = "Copied";
+            StateHasChanged();
+            await Task.Delay(1500);
+            _copyLabel = "Copy";
+        }
+        catch
+        {
+            _copyLabel = "Copy failed";
+        }
+    }
+}

@@ -1,0 +1,51 @@
+name: Deploy Demo to GitHub Pages
+# Run workflow on every push to the main branch
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # Use the latest Ubuntu runner  
+  deploy:    
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout Repository  
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Setup .NET 10 SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      # Restore NuGet Packages
+      - name: Restore
+        run: dotnet restore Comentsys.Toolkit.Blazor/Comentsys.Toolkit.Blazor.sln
+      # Build Demo Project
+      - name: Publish demo
+        run: dotnet publish Comentsys.Toolkit.Blazor/Comentsys.Toolkit.Blazor.Demo/Comentsys.Toolkit.Blazor.Demo.csproj --configuration Release --no-restore --output artifacts/demo
+      # Configure GitHub Pages Base Path
+      - name: Configure GitHub Pages base path
+        shell: pwsh
+        run: |
+          $wwwroot = "artifacts/demo/wwwroot"
+          Copy-Item "$wwwroot/index.html" "$wwwroot/404.html" -Force
+          New-Item "$wwwroot/.nojekyll" -ItemType File -Force | Out-Null
+          foreach ($file in @("$wwwroot/index.html", "$wwwroot/404.html")) {
+            (Get-Content $file -Raw).Replace('<base href="/" />', '<base href="/Comentsys.Toolkit.Blazor/" />') | Set-Content $file -NoNewline
+          }
+      # Deploy to GitHub Pages
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: artifacts/demo/wwwroot

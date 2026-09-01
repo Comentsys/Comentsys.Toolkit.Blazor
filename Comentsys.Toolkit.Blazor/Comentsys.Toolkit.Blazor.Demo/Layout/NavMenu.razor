@@ -1,0 +1,50 @@
+<div class="brand-panel">
+    <a class="brand-logo" href="" aria-label="Comentsys.Toolkit.Blazor">
+        <img src="images/toolkit-blazor.png" alt="Comentsys.Toolkit.Blazor" />
+    </a>
+    <a class="brand-mark" href="">
+        <span>
+            <strong>Comentsys.Toolkit.Blazor</strong>            
+        </span>
+    </a>
+</div>
+<button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu"></button>
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+    <nav class="nav-list">
+        <div class="nav-group">Reference</div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="nav-icon"><Asset Height="18" Mode="AssetMode.Inline" AssetResource="RegularFluentIcons.Get(FluentIconType.Home, _navIcon)" /></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="components">
+                <span class="nav-icon"><Asset Height="18" Mode="AssetMode.Inline" AssetResource="RegularFluentIcons.Get(FluentIconType.PuzzlePiece, _navIcon)" /></span> Components
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="scenarios">
+                <span class="nav-icon"><Asset Height="18" Mode="AssetMode.Inline" AssetResource="RegularFluentIcons.Get(FluentIconType.Flowchart, _navIcon)" /></span> Scenarios
+            </NavLink>
+        </div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="getting-started">
+                <span class="nav-icon"><Asset Height="18" Mode="AssetMode.Inline" AssetResource="RegularFluentIcons.Get(FluentIconType.BookOpen, _navIcon)" /></span> Getting Started
+            </NavLink>
+        </div>
+        <div class="nav-group">Game</div>
+        <div class="nav-item">
+            <NavLink class="nav-link" href="game">
+                <span class="nav-icon"><Asset Height="18" Mode="AssetMode.Inline" AssetResource="RegularFluentIcons.Get(FluentIconType.Rocket, _navIcon)" /></span> Comet Defender
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool _isCollapse = true;
+    private readonly Color _navIcon = Color.White;
+    private string? NavMenuCssClass => _isCollapse ? "collapse" : null;
+
+    private void ToggleNavMenu() => _isCollapse = !_isCollapse;
+}

@@ -1,0 +1,307 @@
+@page "/components/{Component}"
+
+<PageTitle>Comentsys.Toolkit.Blazor - @Title</PageTitle>
+
+<section class="hero">
+    <span class="pill">@Group</span>
+    <h1>@Title</h1>
+    <p>@Description</p>
+</section>
+
+@if (HasThemeColours)
+{
+    <section class="section">
+        <article class="reference-card">
+            <ReferenceHeader Name="Theme colours" Text="Change the colours used by this component preview." />
+            <div class="control-grid">
+                @if (UsesThemePrimary)
+                {
+                    <label class="field">Primary <input type="color" @bind="_themePrimary" @bind:event="oninput" /></label>
+                }
+                @if (UsesThemeLight)
+                {
+                    <label class="field">Light <input type="color" @bind="_themeLight" @bind:event="oninput" /></label>
+                }
+                @if (UsesThemeDark)
+                {
+                    <label class="field">Dark <input type="color" @bind="_themeDark" @bind:event="oninput" /></label>
+                }
+                @if (UsesThemeMuted)
+                {
+                    <label class="field">Muted <input type="color" @bind="_themeMuted" @bind:event="oninput" /></label>
+                }
+            </div>
+        </article>
+    </section>
+}
+
+<section class="section">
+    @switch (Slug)
+    {
+        case "asset":
+            <article class="reference-card">
+                <ReferenceHeader Name="Asset" Text="Render packaged SVG resources with image or inline SVG output." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <Asset Title="Emoji asset" Height="@_assetHeight" Mode="AssetMode.Inline" AssetResource="ShadedFluentEmoji.Get(SelectedEmoji)" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Emoji
+                                <select @bind="_assetEmoji">
+                                    @foreach (var emoji in EmojiTypes)
+                                    {
+                                        <option value="@emoji">@emoji</option>
+                                    }
+                                </select>
+                            </label>
+                            <label class="field">Height <input type="range" min="48" max="180" @bind="_assetHeight" @bind:event="oninput" /></label>
+                        </div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@AssetRows" />
+                        <CodeBlock Code="@AssetSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "clock":
+            <article class="reference-card">
+                <ReferenceHeader Name="Clock" Text="Show analogue time with configurable hand colours and live WebAssembly updates." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <Clock Size="@_clockSize" Background="Color.White" Foreground="@ThemeMuted" HandsFill="@ClockHands" IsRealTimeForWebAssembly="@_clockRealtime" ShowHourHand="@_clockHours" ShowMinuteHand="@_clockMinutes" ShowSecondHand="@_clockSeconds" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Size <input type="range" min="120" max="260" @bind="_clockSize" @bind:event="oninput" /></label>
+                            <label class="field field-inline"><input type="checkbox" @bind="_clockRealtime" /> Real time</label>
+                            <label class="field field-inline"><input type="checkbox" @bind="_clockHours" /> Hour hand</label>
+                            <label class="field field-inline"><input type="checkbox" @bind="_clockMinutes" /> Minute hand</label>
+                            <label class="field field-inline"><input type="checkbox" @bind="_clockSeconds" /> Second hand</label>
+                        </div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@ClockRows" />
+                        <CodeBlock Code="@ClockSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "segment-display":
+            <article class="reference-card">
+                <ReferenceHeader Name="SegmentDisplay" Text="Render time, date, or numeric values in seven-segment style." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <SegmentDisplay @key="SegmentDisplayKey" Mode="@SelectedSegmentMode" Value="@_segmentValue" Height="@_segmentHeight" Width="@_segmentWidth" Fill="@ThemePrimary" IsRealTimeForWebAssembly="@IsSegmentRealtime" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Mode
+                                <select @bind="_segmentMode">
+                                    <option>Value</option>
+                                    <option>Time</option>
+                                    <option>Date</option>
+                                    <option>TimeDate</option>
+                                </select>
+                            </label>
+                            <label class="field">Value <input @bind="_segmentValue" @bind:event="oninput" /></label>
+                            <label class="field">Height <input type="range" min="48" max="140" @bind="_segmentHeight" @bind:event="oninput" /></label>
+                            <label class="field">Width <input type="range" min="140" max="420" @bind="_segmentWidth" @bind:event="oninput" /></label>
+                        </div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@DisplayRows" />
+                        <CodeBlock Code="@SegmentSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "matrix-display":
+            <article class="reference-card">
+                <ReferenceHeader Name="MatrixDisplay" Text="Render values in dot-matrix display style." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <MatrixDisplay @key="MatrixDisplayKey" Mode="@SelectedMatrixMode" Value="@_matrixValue" Height="@_matrixHeight" Width="@_matrixWidth" Fill="@ThemeLight" Style="@SelectedMatrixStyle" IsRealTimeForWebAssembly="@IsMatrixRealtime" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Mode
+                                <select @bind="_matrixMode">
+                                    <option>Value</option>
+                                    <option>Time</option>
+                                    <option>Date</option>
+                                    <option>TimeDate</option>
+                                </select>
+                            </label>
+                            <label class="field">Style
+                                <select @bind="_matrixStyle">
+                                    <option>Square</option>
+                                    <option>Circle</option>
+                                    <option>Hexagon</option>
+                                    <option>Octagon</option>
+                                </select>
+                            </label>
+                            <label class="field">Value <input @bind="_matrixValue" @bind:event="oninput" /></label>
+                            <label class="field">Height <input type="range" min="48" max="140" @bind="_matrixHeight" @bind:event="oninput" /></label>
+                            <label class="field">Width <input type="range" min="140" max="420" @bind="_matrixWidth" @bind:event="oninput" /></label>
+                        </div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@MatrixRows" />
+                        <CodeBlock Code="@MatrixSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "dial":
+            <article class="reference-card">
+                <ReferenceHeader Name="Dial" Text="Capture a rotary numeric value with pointer input." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <Dial Size="@_dialSize" Knob="@_dialKnob" Fill="@ThemePrimary" Foreground="@ThemeMuted" Value="@_dialValue" ValueChanged="DialChanged" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Value <input type="range" min="0" max="360" @bind="_dialValue" @bind:event="oninput" /></label>
+                            <label class="field">Size <input type="range" min="120" max="260" @bind="_dialSize" @bind:event="oninput" /></label>
+                            <label class="field">Knob <input type="range" min="8" max="28" @bind="_dialKnob" @bind:event="oninput" /></label>
+                        </div>
+                        <div class="event-output">@_dialEvent</div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@DialRows" />
+                        <CodeBlock Code="@DialSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "directional-pad":
+            <article class="reference-card">
+                <ReferenceHeader Name="DirectionalPad" Text="Capture up, right, down, and left actions." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <DirectionalPad Size="@_padSize" DirectionsFill="@DirectionalFills" RepeatOnHold="@_padRepeat" DirectionChanged="DirectionChanged" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Size <input type="range" min="120" max="260" @bind="_padSize" @bind:event="oninput" /></label>
+                            <label class="field field-inline"><input type="checkbox" @bind="_padRepeat" /> Repeat on hold</label>
+                        </div>
+                        @if (_padRepeat)
+                        {
+                            <p class="field-hint">Hold a direction down to fire repeated DirectionChanged events.</p>
+                        }
+                        <div class="event-output">@_directionEvent</div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@PadRows" />
+                        <CodeBlock Code="@PadSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "directional-stick":
+            <article class="reference-card">
+                <ReferenceHeader Name="DirectionalStick" Text="Capture joystick angle and ratio values." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <DirectionalStick Size="@_stickSize" Sensitivity="@_stickSensitivity" Fill="@ThemeLight" Foreground="@ThemeDark" ValueChanged="StickChanged" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Size <input type="range" min="80" max="220" @bind="_stickSize" @bind:event="oninput" /></label>
+                            <label class="field">Sensitivity <input type="range" min="0.5" max="2" step="0.1" @bind="_stickSensitivity" @bind:event="oninput" /></label>
+                        </div>
+                        <div class="event-output">@_stickEvent</div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@StickRows" />
+                        <CodeBlock Code="@StickSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "donut":
+            <article class="reference-card">
+                <ReferenceHeader Name="Donut" Text="Visualise proportions as a donut or pie chart." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <Donut Size="@_donutSize" Hole="@_donutHole" StrokeWidth="@_donutStroke" Stroke="Color.White" Items="@SelectedDonutItems" SectorsFill="@ChartFills" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Sectors <input type="range" min="1" max="8" @bind="_donutSectors" @bind:event="oninput" /></label>
+                            <label class="field">Size <input type="range" min="120" max="260" @bind="_donutSize" @bind:event="oninput" /></label>
+                            <label class="field">Hole <input type="range" min="0" max="90" @bind="_donutHole" @bind:event="oninput" /></label>
+                            <label class="field">Stroke <input type="range" min="0" max="10" @bind="_donutStroke" @bind:event="oninput" /></label>
+                        </div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@DonutRows" />
+                        <CodeBlock Code="@DonutSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "gauge":
+            <article class="reference-card">
+                <ReferenceHeader Name="Gauge" Text="Show a clamped value between minimum and maximum bounds." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <Gauge Size="@_gaugeSize" Minimum="0" Maximum="100" Value="@_gaugeValue" Fill="@ThemeLight" Foreground="@ThemeDark" Needle="@_gaugeNeedle" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Value <input type="range" min="0" max="100" @bind="_gaugeValue" @bind:event="oninput" /></label>
+                            <label class="field">Size <input type="range" min="120" max="260" @bind="_gaugeSize" @bind:event="oninput" /></label>
+                            <label class="field">Needle <input type="range" min="2" max="12" @bind="_gaugeNeedle" @bind:event="oninput" /></label>
+                        </div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@GaugeRows" />
+                        <CodeBlock Code="@GaugeSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        case "sector":
+            <article class="reference-card">
+                <ReferenceHeader Name="Sector" Text="Render an arc or ring segment from start and finish angles." />
+                <div class="reference-body">
+                    <div>
+                        <div class="preview-panel">
+                            <Sector Size="@_sectorSize" Start="@_sectorStart" Finish="@_sectorFinish" Hole="@_sectorHole" StrokeWidth="@_sectorStroke" Fill="@ThemePrimary" Stroke="@ThemeDark" />
+                        </div>
+                        <div class="control-grid">
+                            <label class="field">Start <input type="range" min="0" max="360" @bind="_sectorStart" @bind:event="oninput" /></label>
+                            <label class="field">Finish <input type="range" min="0" max="360" @bind="_sectorFinish" @bind:event="oninput" /></label>
+                            <label class="field">Hole <input type="range" min="0" max="100" @bind="_sectorHole" @bind:event="oninput" /></label>
+                            <label class="field">Stroke <input type="range" min="0" max="12" @bind="_sectorStroke" @bind:event="oninput" /></label>
+                        </div>
+                    </div>
+                    <div>
+                        <ParameterTable Rows="@SectorRows" />
+                        <CodeBlock Code="@SectorSnippet" />
+                    </div>
+                </div>
+            </article>
+            break;
+        default:
+            <article class="card">
+                <h2>Component not found</h2>
+                <p>Return to the <a href="components">component index</a>.</p>
+            </article>
+            break;
+    }
+</section>
+
+@if (HasComponentReference)
+{
+    <section class="section">
+        <article class="reference-card">
+            <ReferenceHeader Name="Full-page example" Text="Copy this into a Razor page to try the component in a default Blazor app." />
+            <CodeBlock Title="@FullPageTitle" Code="@FullPageSnippet" />
+        </article>
+    </section>
+}

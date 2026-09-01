@@ -136,6 +136,7 @@ public partial class Clock
     /// <summary>
     /// Stroke Colour of Clock
     /// </summary>
+    [Parameter]
     public Color? Stroke { get; set; }
 
     /// <summary>

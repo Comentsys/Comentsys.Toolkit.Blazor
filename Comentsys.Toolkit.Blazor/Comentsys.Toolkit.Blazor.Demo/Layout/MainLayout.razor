@@ -1,0 +1,21 @@
+@inherits LayoutComponentBase
+<div class="page">
+    <aside class="sidebar">
+        <NavMenu />
+    </aside>
+    <main class="shell">
+        <header class="command-bar">
+            <div>
+                <p class="eyebrow">Developer reference</p>
+                <span>Toolkit with Components for Blazor Server and / or Blazor WebAssembly</span>
+            </div>
+            <div class="command-actions">
+                <a class="command-link" href="https://www.nuget.org/packages/Comentsys.Toolkit.Blazor" target="_blank">NuGet</a>
+                <a class="command-link" href="https://github.com/Comentsys/Comentsys.Toolkit.Blazor" target="_blank">GitHub</a>
+            </div>
+        </header>
+        <article class="content">
+            @Body
+        </article>
+    </main>
+</div>
